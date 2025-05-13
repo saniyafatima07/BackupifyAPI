@@ -11,10 +11,11 @@ const port = 3000;
 connectDB();
 
 app.use('/downloads', express.static(path.join(process.cwd(),'downloads')));
+app.use(express.static(path.resolve('.')))
 
 app.get('/', (req, res) => {
     res.send("Server running, Yay!!")
-})
+})  
 
 app.get('/scrape', async (req, res) => {
     const url = req.query.url;
@@ -34,9 +35,10 @@ app.get('/scrape', async (req, res) => {
 
         doc.fontSize(22).text(data.title || "No Title", {underline: true});
         doc.moveDown();
+        doc.fontSize(14).fillColor('black').text(`Date: ${data.authorDate || new Date().toISOString()}`);
+        doc.moveDown();
         doc.fontSize(14).fillColor('black').text(`URL: `, {continued: true});
         doc.fillColor('blue').text(url);
-        doc.fontSize(14).fillColor('black').text(`Date: ${data.authorDate || new Date().toISOString()}`);
         doc.moveDown();
 
         doc.fillColor('black');

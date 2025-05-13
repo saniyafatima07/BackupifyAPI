@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scrapify</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f9f9f9;
+        color: #333;
+      }
+      header {
+        background-color: #1e88e5;
+        color: white;
+        padding: 0.01rem;
+        text-align: center;
+        height: 120px;
+      }
+      .container {
+        padding: 2rem;
+        max-width: 700px;
+        margin: auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 8rem;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 5px;
+        margin-right: 0.5rem;
+        background-color: #1e88e5;
+        color: white;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+      }
+      button:hover {
+        background-color: #1565c0;
+      }
+      #status {
+        margin-top: 1rem;
+        color: green;
+      }
+      #preview {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: #f1f1f1;
+        border-radius: 8px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-container">
+      <header>
+        <h1>Scrapify</h1>
+        <p>Scrape & Download Web Content with a Click</p>
+      </header>
+    </div>
+
+    <div class="container">
+      <input type="text" id="urlInput" placeholder="Enter URL to scrape..." />
+      <button onclick="startScraping()">Scrape Now</button>
+      <button id="downloadPdfBtn" disabled>Download the PDF</button>
+      <div id="status"></div>
+      <!-- <div id="preview"></div> -->
+    </div>
+
+    <script>
+      async function startScraping() {
+        const url = document.getElementById("urlInput").value.trim();
+        const status = document.getElementById("status");
+        // const preview = document.getElementById("preview");
+        const pdfBtn = document.getElementById("downloadPdfBtn");
+
+        if (!url.startsWith("http")) {
+          status.textContent = "⚠️ Please enter a valid URL.";
+          return;
+        }
+
+        status.textContent = "⏳ Scraping in progress...";
+        // preview.textContent = "";
+        pdfBtn.disabled = true;
+
+        try {
+          const response = await fetch(`http://localhost:3000/scrape?url=${encodeURIComponent(url)}`);
+
+          const result = await response.json();
+
+          if (result.downloadLink) {
+            status.textContent = "✅ Scraping successful!";
+            // preview.textContent = `Scraped Content:\n\nURL: ${url}\nDownload: ${result.downloadLink}`;
+
+            pdfBtn.disabled = false;
+            pdfBtn.onclick = () =>window.open(result.downloadLink,"_blank");
+
+          } else {
+            status.textContent = "Failed to scrape.";
+          }
+        } catch (err) {
+          console.error(err);
+          status.textContent = "Something went wrong.";
+        }
+      }
+    </script>
+  </body>
+</html>
