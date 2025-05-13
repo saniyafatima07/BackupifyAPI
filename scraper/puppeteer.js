@@ -2,7 +2,7 @@ import puppeteer from "puppeteer";
 import scrapedDataModel from '../models/scrapedData.js';
 
 export default async function scrape(url) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.goto(url, { waitUntil: 'networkidle2' });
