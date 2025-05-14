@@ -4,77 +4,292 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Scrapify</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-      body {
-        font-family: "Segoe UI", sans-serif;
+      :root {
+        --primary: #00e5ff;
+        --secondary: #ff00e5;
+        --bg-dark: #121212;
+        --bg-card: #1e1e1e;
+        --text-light: #f0f0f0;
+        --text-gray: #a0a0a0;
+        --success: #4caf50;
+        --warning: #ffb300;
+      }
+      
+      * {
         margin: 0;
         padding: 0;
-        background: #f9f9f9;
-        color: #333;
+        box-sizing: border-box;
       }
+      
+      body {
+        font-family: 'Segoe UI', 'Roboto', sans-serif;
+        background: linear-gradient(135deg, var(--bg-dark), #000);
+        color: var(--text-light);
+        min-height: 100vh;
+        line-height: 1.6;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .header-container {
+        height: 180px;
+        overflow: hidden;
+      }
+      
       header {
-        background-color: #1e88e5;
-        color: white;
-        padding: 0.01rem;
+        background: linear-gradient(135deg, var(--bg-dark), #000);
+        padding: 1.5rem 1rem;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
+      
+      .header-content {
+        position: relative;
+        z-index: 2;
         text-align: center;
-        height: 120px;
       }
+      
+      .header-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 0.5rem;
+        color: transparent;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        background-clip: text;
+        -webkit-background-clip: text;
+      }
+      
+      .header-subtitle {
+        color: var(--text-light);
+        font-size: 1.2rem;
+        font-weight: 300;
+      }
+      
+      .header-graphics {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        overflow: hidden;
+      }
+      
+      .header-circle {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.6;
+      }
+      
+      .circle-1 {
+        background: var(--primary);
+        width: 150px;
+        height: 150px;
+        top: -30px;
+        left: 10%;
+      }
+      
+      .circle-2 {
+        background: var(--secondary);
+        width: 200px;
+        height: 200px;
+        top: 20px;
+        right: 10%;
+      }
+      
       .container {
+        max-width: 800px;
+        margin: 0;
         padding: 2rem;
-        max-width: 700px;
-        margin: auto;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 8rem;
+        background: var(--bg-card);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 10;
+        backdrop-filter: blur(10px);
       }
+      
+      .input-group {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+      
+      .input-icon {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        color: var(--primary);
+        font-size: 1.2rem;
+      }
+      
       input[type="text"] {
         width: 100%;
-        padding: 0.8rem;
-        margin-bottom: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        padding: 1rem 1rem 1rem 3rem;
+        background: rgba(255, 255, 255, 0.07);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        font-size: 1.1rem;
+        color: var(--text-light);
+        transition: all 0.3s ease;
       }
+      
+      input[type="text"]:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.2);
+      }
+      
+      input[type="text"]::placeholder {
+        color: var(--text-gray);
+      }
+      
+      .actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      
       button {
-        padding: 0.7rem 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.9rem 1.5rem;
         border: none;
-        border-radius: 5px;
-        margin-right: 0.5rem;
-        background-color: #1e88e5;
-        color: white;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        flex: 1;
+        min-width: 200px;
       }
-      button:hover {
-        background-color: #1565c0;
+      
+      button i {
+        font-size: 1.2rem;
       }
+      
+      button#scrapeBtn {
+        background: linear-gradient(45deg, var(--primary), #33b1ff);
+        color: #001e29;
+      }
+      
+      button#scrapeBtn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3);
+      }
+      
+      button#downloadPdfBtn {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      button#downloadPdfBtn:enabled {
+        background: linear-gradient(45deg, var(--secondary), #b300ff);
+        border: none;
+      }
+      
+      button#downloadPdfBtn:enabled:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(255, 0, 229, 0.3);
+      }
+      
+      button:active {
+        transform: translateY(1px);
+      }
+      
       #status {
-        margin-top: 1rem;
-        color: green;
-      }
-      #preview {
-        margin-top: 2rem;
+        margin-top: 1.5rem;
         padding: 1rem;
-        background: #f1f1f1;
-        border-radius: 8px;
-        white-space: pre-wrap;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        min-height: 60px;
+      }
+      
+      #status.success {
+        background: rgba(76, 175, 80, 0.15);
+        color: var(--success);
+      }
+      
+      #status.error {
+        background: rgba(244, 67, 54, 0.15);
+        color: var(--error);
+      }
+      
+      #status.warning {
+        background: rgba(255, 179, 0, 0.15);
+        color: var(--warning);
+      }
+      
+      #status.loading {
+        background: rgba(0, 229, 255, 0.15);
+        color: var(--primary);
+      }
+      
+      
+      @media (max-width: 768px) {
+        .header-title {
+          font-size: 2.5rem;
+        }
+        
+        .container {
+          padding: 1.5rem;
+        }
+        
+        .actions {
+          flex-direction: column;
+        }
+        
+        button {
+          width: 100%;
+        }
       }
     </style>
   </head>
   <body>
     <div class="header-container">
       <header>
-        <h1>Scrapify</h1>
-        <p>Scrape & Download Web Content with a Click</p>
+        <div class="header-graphics">
+          <div class="header-circle circle-1"></div>
+          <div class="header-circle circle-2"></div>
+        </div>
+        <div class="header-content">
+          <h1 class="header-title">Scrapify</h1>
+          <p class="header-subtitle">Scrape & Download Web Content with a Click</p>
+        </div>
       </header>
     </div>
 
-    <div class="container">
-      <input type="text" id="urlInput" placeholder="Enter URL to scrape..." />
-      <button onclick="startScraping()">Scrape Now</button>
-      <button id="downloadPdfBtn" disabled>Download the PDF</button>
-      <div id="status"></div>
-      <!-- <div id="preview"></div> -->
+    <div style="display: flex; align-items: center; justify-content: center; padding: 5rem 1rem;">
+      <div class="container">
+      <div class="input-group">
+        <i class="input-icon fas fa-globe"></i>
+        <input type="text" id="urlInput" placeholder="Enter URL to scrape..." />
+      </div>
+      
+      <div class="actions">
+        <button id="scrapeBtn" onclick="startScraping()">
+          <i class="fas fa-search"></i>
+          Scrape Now
+        </button>
+        <button id="downloadPdfBtn" disabled>
+          <i class="fas fa-file-pdf"></i>
+          Download the PDF
+        </button>
+      </div>
+      
+      <div id="status">Enter a URL above to get started</div>
     </div>
 
     <script>
@@ -84,32 +299,39 @@
         const pdfBtn = document.getElementById("downloadPdfBtn");
 
         if (!url.startsWith("http")) {
-          status.textContent = "⚠️ Please enter a valid URL.";
+          status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please enter a valid URL starting with http:// or https://';
+          status.className = 'warning';
           return;
         }
 
-        status.textContent = "⏳ Scraping in progress...";
+        status.innerHTML = '<span class="pulse"></span> Scraping in progress...';
+        status.className = 'loading';
         pdfBtn.disabled = true;
 
         try {
           const response = await fetch(`/scrape?url=${encodeURIComponent(url)}`);
-
           const result = await response.json();
 
           if (result.downloadLink) {
-            status.textContent = "✅ Scraping successful!";
-
+            status.innerHTML = '<i class="fas fa-check-circle"></i> Scraping successful! Click the button below to download.';
+            status.className = 'success';
+            
             pdfBtn.disabled = false;
-            pdfBtn.onclick = () =>window.open(result.downloadLink,"_blank");
-
+            pdfBtn.onclick = () => window.open(result.downloadLink, "_blank");
           } else {
-            status.textContent = "Failed to scrape.";
+            status.innerHTML = '<i class="fas fa-times-circle"></i> Failed to scrape. Please try a different URL.';
+            status.className = 'error';
           }
         } catch (err) {
           console.error(err);
-          status.textContent = "Something went wrong.";
+          status.innerHTML = '<i class="fas fa-times-circle"></i> Something went wrong. Please try again later.';
+          status.className = 'error';
         }
       }
+      
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('urlInput').focus();
+      });
     </script>
   </body>
 </html>
