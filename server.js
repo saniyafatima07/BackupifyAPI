@@ -55,7 +55,7 @@ app.get('/scrape', async (req, res) => {
 
         res.json({
             message: "Scraping done and data saved!",
-            downloadLink: `http://localhost:${port}/downloads/${fileName}`
+            downloadLink: `${req.protocol}://${req.get('host')}/downloads/${fileName}`
         })
 
     }catch(err){
