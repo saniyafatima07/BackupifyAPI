@@ -11,7 +11,7 @@ A short video demo is included to walk you through the key features and how Scra
 Demo video:   [Click here](https://drive.google.com/file/d/1_hVqRUXtCma-LP31UrEPq_WRi3xphstt/view?usp=sharing) 
 ---
 
-## Features
+## Key Features
 
 -  **Web Scraping Made Easy**  
   Instantly extract content from web pages with just a click.
