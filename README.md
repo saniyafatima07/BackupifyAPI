@@ -4,6 +4,13 @@
 
 Scrapify is a powerful yet simple web application that allows users to scrape useful content from websites and download it in a readable, offline-friendly PDF format.
 
+## 📽️ Video Demonstration
+
+A short video demo is included to walk you through the key features and how Scrapify works in real-time.
+
+Demo video:   [Click here](https://drive.google.com/file/d/1_hVqRUXtCma-LP31UrEPq_WRi3xphstt/view?usp=sharing) 
+---
+
 ## Features
 
 -  **Web Scraping Made Easy**  
@@ -22,10 +29,5 @@ Scrapify is a powerful yet simple web application that allows users to scrape us
   - Backend: Node.js, Express.js 
   - Frontend: `HTML`, `CSS`, `JavaScript`  
   - Database: `MongoDB`
-
-## 📽️ Video Demonstration
-
-A short video demo is included to walk you through the key features and how Scrapify works in real-time.
-
 ---
 
