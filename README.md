@@ -8,7 +8,7 @@ Scrapify is a powerful yet simple web application that allows users to scrape us
 
 A short video demo is included to walk you through the key features and how Scrapify works in real-time.
 
-Demo video:   [Click here](https://drive.google.com/file/d/1_hVqRUXtCma-LP31UrEPq_WRi3xphstt/view?usp=sharing) 
+Demo video:   [Click here](https://drive.google.com/file/d/1lHz8sArVlEQUquAMxhyA1l3gqfOXCP3y/view?usp=sharing) 
 ---
 
 ## Key Features
