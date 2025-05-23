@@ -25,7 +25,7 @@ Demo video:   [Click here](https://drive.google.com/file/d/1lHz8sArVlEQUquAMxhyA
 -  **MongoDB Integration**  
   Stores scraped data as backup in MongoDB, ensuring nothing important is lost.
 
-- ⚙️ **Tech Stack**  
+- **Tech Stack**  
   - Backend: Node.js, Express.js 
   - Frontend: `HTML`, `CSS`, `JavaScript`  
   - Database: `MongoDB`
